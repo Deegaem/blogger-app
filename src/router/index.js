@@ -1,14 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import ShowBlogs from '../components/ShowBlogs.vue'
+import AddBlog from '../components/AddBlog.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'ShowBlogs',
+    component: ShowBlogs
+  },
+  {
+    path: '/add',
+    name: 'AddBlog',
+    component: AddBlog
   },
   {
     path: '/about',

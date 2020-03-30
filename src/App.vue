@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">ShowBlogs</router-link> |
+      <router-link to="/add">AddBlog</router-link>
     </div>
+    <div id="center">
     <router-view/>
+    </div>
   </div>
 </template>
 
@@ -28,5 +30,11 @@
       color: #42b983;
     }
   }
+}
+#center {
+  margin: auto;
+  width: 70%;
+  border: 3px solid #e6ebe9;
+  padding: 10px;
 }
 </style>
