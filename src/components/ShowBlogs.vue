@@ -5,7 +5,9 @@
       <li v-for="(blog, id) in blogs" :key="id">
         <div class="card mb-2">
           <div class="card-body">
-            <h4 class="card-title">{{blog.title}}</h4>
+            <router-link v-bind:to="'/blog/'+ blog.id">
+              <h4 class="card-title">{{blog.title}}</h4>
+            </router-link>
             <p class="card-text">{{blog.body}}</p>
             <a href="#" class="card-link">Another link</a>
           </div>
@@ -29,6 +31,10 @@ export default {
       .get("http://jsonplaceholder.typicode.com/posts")
       .then(response => {
         this.blogs = response.data.slice(0, 10);
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
       });
   }
 };

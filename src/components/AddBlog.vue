@@ -89,11 +89,7 @@ export default {
   methods: {
     post: function() {
       this.axios
-        .post("http://jsonplaceholder.typicode.com/posts", {
-          title: this.blog.title,
-          body: this.blog.content,
-          userld: 1
-        })
+        .post("https://blogger-app-31f2a.firebaseio.com/posts.json", this.blog)
         .then(response => {
           console.log(response.data);
           this.submitted = true;
