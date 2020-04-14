@@ -51,14 +51,13 @@
       <button class="btn btn-primary" v-on:click.prevent="post">Add Blog</button>
     </form>
     <div v-if="submitted">
-      <h3>Thanks for adding your post</h3>
-      <!-- </div>
-      <div id="preview">
-      <h3>Preview Blog</h3>-->
-      <p>Blog title:{{blog.title}}</p>
+      <h3>Thanks for adding your post {{blog.title}}</h3>
+      <br />
       <p>Blog Content:</p>
+      <br />
       <p>{{blog.content}}</p>
-      <p>Blog Categories</p>
+      <br />
+      <p>Blog Categories:</p>
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -66,12 +65,15 @@
           :key="categorie"
         >{{categorie}}</li>
       </ul>
-      <p>Author:{{blog.author}}</p>
+      <br />
+      <p>Author: {{blog.author}}</p>
     </div>
   </div>
 </template>
 
 <script>
+import { db } from "../db";
+
 export default {
   name: "AddBlog",
   data: () => {
@@ -88,10 +90,14 @@ export default {
   },
   methods: {
     post: function() {
-      this.axios
-        .post("https://blogger-app-31f2a.firebaseio.com/posts.json", this.blog)
-        .then(response => {
-          console.log(response.data);
+      db.collection("blogs")
+        .add({
+          author: this.blog.author,
+          categories: this.blog.categories,
+          content: this.blog.content,
+          title: this.blog.title
+        })
+        .then(() => {
           this.submitted = true;
         });
     }
@@ -99,7 +105,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h3 {
   margin: 40px 0 0;

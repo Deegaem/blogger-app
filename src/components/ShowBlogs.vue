@@ -2,14 +2,13 @@
   <div class="container">
     <h1>All Blog Articles</h1>
     <ul>
-      <li v-for="(blog, id) in blogs" :key="id">
+      <li v-for="blog of blogs" :key="blog.id">
         <div class="card mb-2">
           <div class="card-body">
             <router-link v-bind:to="'/blog/'+ blog.id">
               <h4 class="card-title">{{blog.title}}</h4>
             </router-link>
-            <p class="card-text">{{blog.body}}</p>
-            <a href="#" class="card-link">Another link</a>
+            <p class="card-text">{{blog.content}}</p>
           </div>
         </div>
       </li>
@@ -18,23 +17,20 @@
 </template>
 
 <script>
+import { db } from "../db";
+
 export default {
   name: "ShowBlogs",
-  data: () => {
-    return {
-      blogs: []
-    };
-  },
-  methods: {},
-  created() {
-    this.axios
-      .get("http://jsonplaceholder.typicode.com/posts")
-      .then(response => {
-        this.blogs = response.data.slice(0, 10);
-      })
-      .catch(function(error) {
-        // handle error
-        console.log(error);
+  data: () => ({ blogs: [] }),
+  created: function() {
+    db.collection("blogs")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let item = doc.data();
+          item.id = doc.id;
+          this.blogs.push(item);
+        });
       });
   }
 };
@@ -53,7 +49,27 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #e6ebe9;
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
 }
 </style>
