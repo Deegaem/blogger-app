@@ -48,7 +48,7 @@
           <option v-for="author in authors" :key="author">{{author}}</option>
         </select>
       </div>
-      <button class="btn btn-primary" v-on:click.prevent="post">Update</button>
+      <button class="btn btn-primary" v-on:click.prevent="update">Update</button>
     </form>
     <div v-if="show">
       <h3>{{blog.title}}</h3>
@@ -86,12 +86,25 @@ export default {
       });
   },
   methods: {
+    update: function() {
+      db.collection("blogs")
+        .doc(this.id)
+        .update({
+          title: this.blog.title,
+          content: this.blog.content,
+          categories: this.blog.categories,
+          author: this.blog.author
+        })
+        .then(() => {
+          this.$router.push("/");
+        });
+    },
     remove: function() {
       db.collection("blogs")
         .doc(this.id)
         .delete()
-        .then(()=> {
-          this.$router.push('/');
+        .then(() => {
+          this.$router.push("/");
         });
     },
     toggle: function() {
