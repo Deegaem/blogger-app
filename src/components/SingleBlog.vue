@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2 v-if="!show">{{blog.title}}</h2>
-    <b-form v-if="!show">
+    <b-form class="my-style" v-if="!show">
       <b-form-group id="input-group-1" label="Blog Title:" label-for="input-1">
         <b-form-input id="input-1" v-model="blog.title" type="text" placeholder="Blog Title"></b-form-input>
       </b-form-group>
@@ -16,13 +16,11 @@
           <b-form-checkbox value="travel">Travel</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
-      <b-form-select v-model="blog.author" class="mb-3">
-        <b-form-select-option v-for="author in authors" :key="author">{{author}}</b-form-select-option>
-      </b-form-select>
+      <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
       <b-button variant="primary" v-on:click.prevent="update">Update</b-button>
     </b-form>
-    <div v-if="show">
-      <h3>{{blog.title}}</h3>
+    <div class="my-style" v-if="show">
+      <h2 class="mt-3">{{blog.title}}</h2>
       <br />
       <p>{{blog.content}}</p>
       <br />
@@ -86,29 +84,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h2 {
+  color: #007bff;
+}
 .my-mb {
   margin-bottom: 15px;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #e6ebe9;
-}
-#checkboxes input {
-  display: inline-block;
-  margin-right: 10px;
-}
-#checkboxes label {
-  display: inline-block;
-  margin: 0 30px;
+.my-style {
+  padding: 0.75rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>

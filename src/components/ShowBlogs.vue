@@ -1,12 +1,13 @@
 <template>
   <div>
+    <h1>Blogs List</h1>
     <b-list-group>
       <b-list-group-item v-for="blog of blogs" :key="blog.id">
-        <b-card title="All Blog Articles" class="mb-2">
+        <b-card class="mb-2">
           <router-link v-bind:to="'/blog/'+ blog.id">
-            <h4 class="card-title">{{blog.title}}</h4>
+            <h2 class="card-title">{{blog.title}}</h2>
           </router-link>
-          <b-card-text>{{blog.content}}</b-card-text>
+          <b-card-text>{{blog.content|snippet}}</b-card-text>
         </b-card>
       </b-list-group-item>
     </b-list-group>
@@ -44,38 +45,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
+h1,
+h2 {
+  color: #007bff;
 }
 a:link {
-  color: green;
   background-color: transparent;
   text-decoration: none;
-}
-
-a:visited {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
 }
 </style>

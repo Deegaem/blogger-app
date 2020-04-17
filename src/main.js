@@ -14,9 +14,13 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
+Vue.filter("snippet", function(value) {
+  return value.slice(0, 100) + "...";
+});
+
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
