@@ -1,27 +1,33 @@
 <template>
-  <div class="container">
-    <h1>All Blog Articles</h1>
-    <ul>
-      <li v-for="blog of blogs" :key="blog.id">
-        <div class="card mb-2">
-          <div class="card-body">
-            <router-link v-bind:to="'/blog/'+ blog.id">
-              <h4 class="card-title">{{blog.title}}</h4>
-            </router-link>
-            <p class="card-text">{{blog.content}}</p>
-          </div>
-        </div>
-      </li>
-    </ul>
+  <div>
+    <b-list-group>
+      <b-list-group-item v-for="blog of blogs" :key="blog.id">
+        <b-card title="All Blog Articles" class="mb-2">
+          <router-link v-bind:to="'/blog/'+ blog.id">
+            <h4 class="card-title">{{blog.title}}</h4>
+          </router-link>
+          <b-card-text>{{blog.content}}</b-card-text>
+        </b-card>
+      </b-list-group-item>
+    </b-list-group>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      first-text="⏮"
+      prev-text="⏪"
+      next-text="⏩"
+      last-text="⏭"
+      class="mt-4"
+    ></b-pagination>
   </div>
 </template>
-
 <script>
 import { db } from "../db";
 
 export default {
   name: "ShowBlogs",
-  data: () => ({ blogs: [] }),
+  data: () => ({ blogs: [], currentPage: 1, rows: 1, perPage: 3 }),
   created: function() {
     db.collection("blogs")
       .get()

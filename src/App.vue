@@ -1,14 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">ShowBlogs</router-link>|
-      <router-link to="/add">AddBlog</router-link>
-    </div>
+    <BlogHeader></BlogHeader>
     <div id="center">
-      <router-view />
+      <b-container>
+        <b-row align-v="center">
+          <router-view />
+        </b-row>
+      </b-container>
     </div>
+    <BlogFooter></BlogFooter>
   </div>
 </template>
+
+<script>
+import BlogHeader from "./components/BlogHeader.vue";
+import BlogFooter from "./components/BlogFooter.vue";
+
+export default {
+  components: {
+    BlogHeader,
+    BlogFooter
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -18,23 +32,14 @@
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 #center {
   margin: auto;
   width: 70%;
-  border: 3px solid #e6ebe9;
+  background-color: white;
+  border: 3px solid #e6faf4;
   padding: 10px;
+}
+.list-group-item {
+  border: 1px solid width;
 }
 </style>
