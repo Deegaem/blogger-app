@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Blogs List</h1>
+    <h2 class="ml-4">Blogs List</h2>
     <b-list-group>
       <b-list-group-item v-for="blog of blogs" :key="blog.id">
-        <b-card class="mb-2">
+        <b-card class="my-border mb-2">
           <router-link v-bind:to="'/blog/'+ blog.id">
             <h2 class="card-title">{{blog.title}}</h2>
           </router-link>
@@ -19,7 +19,7 @@
       prev-text="⏪"
       next-text="⏩"
       last-text="⏭"
-      class="mt-4"
+      class="mt-4 ml-4"
     ></b-pagination>
   </div>
 </template>
@@ -45,12 +45,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h1,
-h2 {
-  color: #007bff;
-}
 a:link {
-  background-color: transparent;
   text-decoration: none;
+}
+.list-group-item {
+  border: 1px solid #ffff;
+}
+.my-border {
+  border: 1px solid #e6faf4;
 }
 </style>

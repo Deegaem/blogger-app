@@ -1,5 +1,5 @@
 <template>
-  <b-navbar class="mb-1 " toggleable="lg" type="dark" variant="info">
+  <b-navbar class="mb-2 " toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">Blogger-app</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

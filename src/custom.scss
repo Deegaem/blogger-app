@@ -1,0 +1,28 @@
+// Define your variable overrides here
+
+$enable-gradients: true;
+$theme-colors: (
+    "primary": #17a2b8,
+    "danger": #ff4136,
+);
+
+// Include Bootstrap and BootstrapVue SCSS files
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap-vue/src/index.scss";
+
+

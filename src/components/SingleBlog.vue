@@ -84,15 +84,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h2 {
-  color: #007bff;
-}
 .my-mb {
   margin-bottom: 15px;
-}
-.my-style {
-  padding: 0.75rem 1.25rem;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>

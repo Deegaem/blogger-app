@@ -75,16 +75,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h3,
-h2 {
-  color: #007bff;
-}
 a {
   color: #e6ebe9;
-}
-.my-style {
-  padding: 0.75rem 1.25rem;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>
