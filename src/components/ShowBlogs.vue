@@ -24,21 +24,22 @@
   </div>
 </template>
 <script>
-import { db } from "../db";
-
 export default {
   name: "ShowBlogs",
-  data: () => ({ blogs: [], currentPage: 1, rows: 1, perPage: 3 }),
+  data() {
+    return {
+      currentPage: 1,
+      rows: 1,
+      perPage: 3
+    };
+  },
+  computed: {
+    blogs() {
+      return this.$store.state.blogs;
+    }
+  },
   created: function() {
-    db.collection("blogs")
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let item = doc.data();
-          item.id = doc.id;
-          this.blogs.push(item);
-        });
-      });
+    this.$store.dispatch("getBlogs");
   }
 };
 </script>
