@@ -9,71 +9,29 @@ export default new Vuex.Store({
     blogs: [],
   },
   mutations: {
-    setBlogs(state) {
-      db.collection("blogs")
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            let item = doc.data();
-            item.id = doc.id;
-            state.blogs.push(item);
-          });
-        });
+    setBlogs(state, data) {
+      state.blogs = data;
     },
   },
   actions: {
     getBlogs(context) {
-      context.commit("setBlogs");
+      db.collection("blogs")
+        .get()
+        .then((snapshot) => {
+          let items = [];
+          snapshot.forEach((doc) => {
+            let item = doc.data();
+            item.id = doc.id;
+            items.push(item);
+          });
+          context.commit("setBlogs", items);
+        });
+    },
+  },
+  getters: {
+    getBlogById: (state) => (id) => {
+      return state.blogs.find((blog) => blog.id === id);
     },
   },
   modules: {},
 });
-
-// actions:{
-//   getStudents(context){
-//   context.commit('setStudents');
-//   },
-//   addTeamMember(context,data){
-//   context.commit('pushMemberToTeam',data);
-//   context.commit('changeSelectedState',data.index);
-//   },
-//   removeFromTeam(context,data){
-//   context.commit('spliceFromTeam',data)
-//   }
-//   },
-//   mutations:{
-
-//   setStudents(state){
-//   state.students=data.getStudents();
-//   },
-//   pushMemberToTeam(state,data){
-//   state.teamA.puch(state.students[data.index]);
-//   },
-//   changeSelectedState(state,data.index){
-//   state.students[data.index].selected=ture;
-//   },
-//   spliceFromStudents(state,data){
-//   state.students.splice(data.index,1);
-//   }
-//   }
-//   }
-//   }
-
-//   im component beispiel
-//   ---------------------
-//   computed:{
-//   students(){
-//   return this.$store.state.students;
-//   }
-//   }
-//   methods:{
-//   addTeamMember(type,index){
-//   this.$store.dispatch('addTeamMember',{type,index})
-//   },
-//   removeFromTeam(){
-//   this.$store.dispatch('removeFromTeam')
-//   }
-//   },
-//   created(){
-//   this.$store.dispatch('getstudents');
-//   }

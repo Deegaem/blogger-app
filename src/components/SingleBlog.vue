@@ -40,19 +40,14 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      blog: {},
       authors: ["Angular", "Vue", "React"],
       show: true
     };
   },
-  created() {
-    db.collection("blogs")
-      .doc(this.id)
-      .get()
-      .then(snapshot => {
-        const document = snapshot.data();
-        this.blog = document;
-      });
+  computed: {
+    blog() {
+      return this.$store.getters.getBlogById(this.id);
+    }
   },
   methods: {
     update: function() {
