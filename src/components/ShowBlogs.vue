@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     blogs() {
-      return this.$store.state.blogs;
+      return this.$store.getters.getAllBlog();
     }
   },
   created: function() {

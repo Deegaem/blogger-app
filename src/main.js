@@ -3,8 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { firestorePlugin } from "vuefire";
@@ -12,7 +10,6 @@ import { firestorePlugin } from "vuefire";
 Vue.use(firestorePlugin);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 Vue.filter("snippet", function(value) {
   return value.slice(0, 100) + "...";

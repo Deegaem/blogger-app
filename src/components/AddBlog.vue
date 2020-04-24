@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { mapActions } from "vuex";
 
 export default {
   name: "AddBlog",
@@ -58,17 +58,15 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addBlog"]),
     post: function() {
-      db.collection("blogs")
-        .add({
-          author: this.blog.author,
-          categories: this.blog.categories,
-          content: this.blog.content,
-          title: this.blog.title
-        })
-        .then(() => {
-          this.submitted = true;
-        });
+      this.addBlog({
+        author: this.blog.author,
+        categories: this.blog.categories,
+        content: this.blog.content,
+        title: this.blog.title
+      });
+      this.submitted = true;
     }
   }
 };

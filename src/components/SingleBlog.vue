@@ -33,8 +33,7 @@
 </template>
 
 <script>
-import { db } from "../db";
-
+import { mapActions } from "vuex";
 export default {
   name: "SingleBlog",
   data() {
@@ -50,26 +49,20 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["deleteBlog", "updateBlog"]),
     update: function() {
-      db.collection("blogs")
-        .doc(this.id)
-        .update({
-          title: this.blog.title,
-          content: this.blog.content,
-          categories: this.blog.categories,
-          author: this.blog.author
-        })
-        .then(() => {
-          this.$router.push("/");
-        });
+      this.updateBlog({
+        id: this.id,
+        title: this.blog.title,
+        content: this.blog.content,
+        categories: this.blog.categories,
+        author: this.blog.author
+      });
+      this.$router.push("/");
     },
     remove: function() {
-      db.collection("blogs")
-        .doc(this.id)
-        .delete()
-        .then(() => {
-          this.$router.push("/");
-        });
+      this.deleteBlog(this.id);
+      this.$router.push("/");
     },
     toggle: function() {
       this.show = !this.show;
