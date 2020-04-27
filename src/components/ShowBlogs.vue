@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2 class="ml-4">Blogs List</h2>
+    <BlogsFilter />
     <b-list-group>
       <b-list-group-item v-for="blog of blogs" :key="blog.id">
         <b-card class="my-border mb-2">
@@ -24,22 +25,26 @@
   </div>
 </template>
 <script>
+import BlogsFilter from "./BlogsFilter.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
+  components: {
+    BlogsFilter
+  },
   name: "ShowBlogs",
-  data() {
+  data: () => {
     return {
       currentPage: 1,
       rows: 1,
       perPage: 3
     };
   },
-  computed: {
-    blogs() {
-      return this.$store.getters.getAllBlog();
-    }
-  },
+  computed: mapGetters({ blogs: "getAllBlog" }),
   created: function() {
-    this.$store.dispatch("getBlogs");
+    this.getBlogs();
+  },
+  methods: {
+    ...mapActions(["getBlogs"])
   }
 };
 </script>

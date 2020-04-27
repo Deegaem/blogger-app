@@ -5,10 +5,10 @@ export default {
     blogs: [],
   },
   mutations: {
-    setBlogs(state, data) {
+    setBlogs: (state, data) => {
       state.blogs = data;
     },
-    newBlog(state, data) {
+    newBlog: (state, data) => {
       state.blogs.unshift(data);
     },
     updateBlog: (state, updBlog) => {
@@ -17,12 +17,12 @@ export default {
         state.blogs.splice(index, 1, updBlog);
       }
     },
-    removeBlog(state, id) {
+    removeBlog: (state, id) => {
       state.blogs = state.blogs.filter((blog) => blog.id !== id);
     },
   },
   actions: {
-    getBlogs(context) {
+    getBlogs: (context) => {
       db.collection("blogs")
         .get()
         .then((snapshot) => {
@@ -35,14 +35,29 @@ export default {
           context.commit("setBlogs", items);
         });
     },
-    addBlog(context, data) {
+    getFilteredBlogs: (context, e) => {
+      const limit = e;
+      db.collection("blogs")
+        .limit(limit)
+        .get()
+        .then((snapshot) => {
+          let items = [];
+          snapshot.forEach((doc) => {
+            let item = doc.data();
+            item.id = doc.id;
+            items.push(item);
+          });
+          context.commit("setBlogs", items);
+        });
+    },
+    addBlog: (context, data) => {
       db.collection("blogs")
         .add(data)
         .then((res) => {
           context.commit("newBlog", res.data);
         });
     },
-    updateBlog(context, updblog) {
+    updateBlog: (context, updblog) => {
       db.collection("blogs")
         .doc(updblog.id)
         .update(updblog)
@@ -50,7 +65,7 @@ export default {
           context.commit("updateBlog", updblog);
         });
     },
-    deleteBlog(context, id) {
+    deleteBlog: (context, id) => {
       db.collection("blogs")
         .doc(id)
         .delete()
@@ -60,7 +75,7 @@ export default {
     },
   },
   getters: {
-    getAllBlog: (state) => () => {
+    getAllBlog: (state) => {
       return state.blogs;
     },
     getBlogById: (state) => (id) => {
