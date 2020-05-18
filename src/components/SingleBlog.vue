@@ -21,6 +21,9 @@
     </b-form>
     <div class="my-style" v-if="show">
       <h2 class="mt-3">{{blog.title}}</h2>
+      <div>
+        <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+      </div>
       <br />
       <p>{{blog.content}}</p>
       <br />

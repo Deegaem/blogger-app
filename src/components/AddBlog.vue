@@ -8,7 +8,15 @@
       <b-form-group label="Blog Content:" label-for="input-2">
         <b-form-textarea id="input-2" v-model="blog.content" size="sm" placeholder="Add content"></b-form-textarea>
       </b-form-group>
-
+      <b-form-file
+        v-model="file"
+        ref="pickImage"
+        class="mt-3 mb-3"
+        accept="image/*"
+        plain
+        placeholder="select add Image"
+      ></b-form-file>
+      <b-progress variant="primary" :value="value" :max="max" ></b-progress>
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="blog.categories" id="checkboxes-4">
           <b-form-checkbox value="sport">sport</b-form-checkbox>
@@ -42,7 +50,7 @@
 
 <script>
 import { mapActions } from "vuex";
-
+import { storageRef } from "../db";
 export default {
   name: "AddBlog",
   data: () => {
@@ -50,21 +58,51 @@ export default {
       blog: {
         title: "",
         content: "",
+        remoteUrl: "",
         categories: [],
         author: ""
       },
-      authors: ["Angular", "Vue", "React"],
-      submitted: false
+      authors: ["Adele Vance", "Alex Wiber", "Debra Berger"],
+      submitted: false,
+      file: null,
+      value: 0,
+      max: 100
     };
+  },
+  watch: {
+    file() {
+      console.log(this.file);
+      var imageName = this.file.name;
+      var sr = storageRef.ref("images/" + imageName);
+      var uploadTask = sr.put(this.file);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          this.value =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * this.max;
+          console.log("upload is" + this.value + "done");
+        },
+        error => {
+          console.log(error.message);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then(url => {
+            this.remoteUrl = url;
+            console.log("remoteUrl: ", this.remoteUrl);
+          });
+        }
+      );
+    }
   },
   methods: {
     ...mapActions(["addBlog"]),
     post: function() {
       this.addBlog({
-        author: this.blog.author,
-        categories: this.blog.categories,
+        title: this.blog.title,
         content: this.blog.content,
-        title: this.blog.title
+        remoteUrl: this.remoteUrl,
+        categories: this.blog.categories,
+        author: this.blog.author
       });
       this.submitted = true;
     }

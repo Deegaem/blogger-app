@@ -5,6 +5,7 @@
     <b-list-group>
       <b-list-group-item v-for="blog of blogs" :key="blog.id">
         <b-card class="my-border mb-2">
+          <b-img right src="https://picsum.photos/125/125/?image=58" alt="Right image"></b-img>
           <router-link v-bind:to="'/blog/'+ blog.id">
             <h2 class="card-title">{{blog.title}}</h2>
           </router-link>
