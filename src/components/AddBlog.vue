@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h2 v-if="!submitted">Add a New Blog Post</h2>
     <b-form class="my-style" v-if="!submitted">
+      <h3 v-if="!submitted">Add a New Blog Post</h3>
       <b-form-group id="input-group-1" label="Blog Title:" label-for="input-1">
         <b-form-input id="input-1" v-model="blog.title" type="text" placeholder="Blog Title"></b-form-input>
       </b-form-group>
@@ -16,7 +16,7 @@
         plain
         placeholder="select add Image"
       ></b-form-file>
-      <b-progress variant="primary" :value="value" :max="max" ></b-progress>
+      <b-progress class="mb-3" variant="primary" :value="value" :max="max"></b-progress>
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="blog.categories" id="checkboxes-4">
           <b-form-checkbox value="sport">sport</b-form-checkbox>
@@ -25,7 +25,7 @@
         </b-form-checkbox-group>
       </b-form-group>
       <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
-      <b-button variant="primary" v-on:click.prevent="post">Add Blog</b-button>
+      <b-button class="mybtn mt-2" variant="primary" v-on:click.prevent="post">Add Blog</b-button>
     </b-form>
     <div class="my-style" v-if="submitted">
       <h3>Thanks for adding your post {{blog.title}}</h3>
@@ -58,7 +58,7 @@ export default {
       blog: {
         title: "",
         content: "",
-        remoteUrl: "",
+        remoteImgUrl: "",
         categories: [],
         author: ""
       },
@@ -71,7 +71,6 @@ export default {
   },
   watch: {
     file() {
-      console.log(this.file);
       var imageName = this.file.name;
       var sr = storageRef.ref("images/" + imageName);
       var uploadTask = sr.put(this.file);
@@ -80,15 +79,11 @@ export default {
         snapshot => {
           this.value =
             (snapshot.bytesTransferred / snapshot.totalBytes) * this.max;
-          console.log("upload is" + this.value + "done");
         },
-        error => {
-          console.log(error.message);
-        },
+        null,
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then(url => {
-            this.remoteUrl = url;
-            console.log("remoteUrl: ", this.remoteUrl);
+            this.remoteImgUrl = url;
           });
         }
       );
@@ -100,7 +95,7 @@ export default {
       this.addBlog({
         title: this.blog.title,
         content: this.blog.content,
-        remoteUrl: this.remoteUrl,
+        remoteImgUrl: this.remoteImgUrl,
         categories: this.blog.categories,
         author: this.blog.author
       });
@@ -113,5 +108,8 @@ export default {
 <style scoped lang="scss">
 a {
   color: #e6ebe9;
+}
+.mybg {
+  background-color: #17a2b8 !important;
 }
 </style>

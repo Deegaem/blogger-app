@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2 class="ml-4">Blogs List</h2>
-    <BlogsFilter />
+    <h2 class="ml-4 mt-5">Bloglist</h2>
+    <!-- <BlogsFilter /> -->
     <b-list-group>
       <b-list-group-item v-for="blog of blogs" :key="blog.id">
         <b-card class="my-border mb-2">
-          <b-img right src="https://picsum.photos/125/125/?image=58" alt="Right image"></b-img>
           <router-link v-bind:to="'/blog/'+ blog.id">
-            <h2 class="card-title">{{blog.title}}</h2>
+            <h3 class="card-title">{{blog.title}}</h3>
           </router-link>
+          <b-img right :src="blog.remoteImgUrl" fluid alt="Right image" style="max-width: 10rem;"></b-img>
           <b-card-text>{{blog.content|snippet}}</b-card-text>
         </b-card>
       </b-list-group-item>
@@ -26,12 +26,12 @@
   </div>
 </template>
 <script>
-import BlogsFilter from "./BlogsFilter.vue";
+// import BlogsFilter from "./BlogsFilter.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  components: {
-    BlogsFilter
-  },
+  // components: {
+  //   BlogsFilter
+  // },
   name: "ShowBlogs",
   data: () => {
     return {

@@ -33,8 +33,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-h1,
-h2 {
+h2,
+h3 {
   color: #17a2b8;
 }
 
@@ -56,8 +56,13 @@ h2 {
   border: 1px solid width;
 }
 .my-style {
-  padding: 0.75rem 1.25rem;
+  padding: 1.25rem;
   background-color: #fff;
   border: 1px solid #e6faf4;
+  margin-bottom: 3rem;
+}
+
+.mybtn:active {
+  background-color: #3e6a8e !important;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="card-body">
-    Blogs Filter:
+  <div>
+    Filter:
     <b-form-select
-      class="my-border"
+      class="myFilterStyle"
       :options="FilterArray"
       v-on:change="event => getFilteredBlogs(event)"
     ></b-form-select>
@@ -22,7 +22,8 @@ export default {
 };
 </script>
 <style>
-.my-border {
+.myFilterStyle {
+  max-width: 10rem;
   border: 1px solid #e6faf4;
 }
 </style>

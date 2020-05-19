@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h2 v-if="!show">{{blog.title}}</h2>
     <b-form class="my-style" v-if="!show">
       <b-form-group id="input-group-1" label="Blog Title:" label-for="input-1">
         <b-form-input id="input-1" v-model="blog.title" type="text" placeholder="Blog Title"></b-form-input>
@@ -8,7 +7,6 @@
       <b-form-group label="Blog Content:" label-for="input-2">
         <b-form-textarea id="input-2" v-model="blog.content" size="sm" placeholder="Add content"></b-form-textarea>
       </b-form-group>
-
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="blog.categories" id="checkboxes-4">
           <b-form-checkbox value="sport">sport</b-form-checkbox>
@@ -20,17 +18,17 @@
       <b-button variant="primary" v-on:click.prevent="update">Update</b-button>
     </b-form>
     <div class="my-style" v-if="show">
-      <h2 class="mt-3">{{blog.title}}</h2>
+      <h3 class="mt-3">{{blog.title}}</h3>
       <div>
-        <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+        <b-img :src="blog.remoteImgUrl" fluid alt="Responsive image"></b-img>
       </div>
       <br />
       <p>{{blog.content}}</p>
       <br />
       <p>Author: {{blog.author}}</p>
       <br />
-      <button class="btn btn-primary mx-2" v-on:click="toggle()">To Update</button>
-      <button class="btn btn-primary mx-2" v-on:click="remove">Remove</button>
+      <button class="btn mybtn btn-primary mx-2 mb-2" v-on:click="toggle()">To Update</button>
+      <button class="btn mybtn btn-primary mb-2" v-on:click="remove">Remove</button>
     </div>
   </div>
 </template>
