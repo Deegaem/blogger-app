@@ -20,7 +20,7 @@
     <div class="my-style" v-if="show">
       <h3 class="mt-3">{{blog.title}}</h3>
       <div>
-        <b-img :src="blog.remoteImgUrl" fluid alt="Responsive image"></b-img>
+        <b-img id="myImg" :src="blog.remoteImgUrl" fluid alt="Responsive image"></b-img>
       </div>
       <br />
       <p>{{blog.content}}</p>
@@ -28,7 +28,7 @@
       <p>Author: {{blog.author}}</p>
       <br />
       <button class="btn mybtn btn-primary mx-2 mb-2" v-on:click="toggle()">To Update</button>
-      <button class="btn mybtn btn-primary mb-2" v-on:click="remove">Remove</button>
+      <button class="btn mybtn btn-primary mb-2" v-on:click="removeBlog">Remove</button>
     </div>
   </div>
 </template>
@@ -61,10 +61,25 @@ export default {
       });
       this.$router.push("/");
     },
-    remove: function() {
+    removeBlog: function() {
       this.deleteBlog(this.id);
       this.$router.push("/");
     },
+    // removeImage: function() {
+    //   // Create a reference to the file to delete
+    //   var desertRef = storageRef.child("images/desert.jpg");
+
+    //   // Delete the file
+    //   desertRef
+    //     .delete()
+    //     .then(function() {
+    //       // File deleted successfully
+    //     })
+    //     .catch(function(error) {
+    //       // Uh-oh, an error occurred!
+    //     });
+    // },
+
     toggle: function() {
       this.show = !this.show;
     }
@@ -75,5 +90,9 @@ export default {
 <style scoped lang="scss">
 .my-mb {
   margin-bottom: 15px;
+}
+#myImg {
+  max-width: 780px;
+  max-height: 312px;
 }
 </style>
