@@ -32,25 +32,29 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
+  background-color: #686354}
 h2,
 h3 {
-  color: #17a2b8;
+  color: #444036;
+}
+
+.my-bg {
+  background-color: #0d3446 !important;
 }
 
 .page-item.active .page-link {
-  background-color: #17a2b8 !important;
+  background-color: #444036 !important;
 }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #17a2b8;
+  background-color: #444036;
 }
 
 #my-wrapper {
   margin: auto;
   width: 70%;
-  background-color: white;
+  background-color: #fff;
   border: 3px solid #e6faf4;
-  padding: 10px;
+  padding: 20px;
 }
 .list-group-item {
   border: 1px solid width;
@@ -61,8 +65,11 @@ h3 {
   border: 1px solid #e6faf4;
   margin-bottom: 3rem;
 }
-
 .mybtn:active {
-  background-color: #3e6a8e !important;
+  background-color: #0d3446 !important;
+}
+.myImg{
+max-width: 160px;
+max-height: 62px;
 }
 </style>

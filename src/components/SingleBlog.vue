@@ -16,7 +16,7 @@
         placeholder="select add Image"
         v-if="!flag"
       ></b-form-file>
-      <b-progress class="mb-3" variant="primary" :value="value" :max="max" v-if="!flag"></b-progress>
+      <b-progress class="mb-2" variant="primary" :value="value" :max="max" v-if="!flag"></b-progress>
       <b-button class="mb-2" variant="primary" v-on:click="removeImage" v-if="flag">Remove old image</b-button>
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="blog.categories" id="checkboxes-4">
@@ -104,7 +104,6 @@ export default {
       this.$router.push("/");
     },
     removeImage: function() {
-      console.log("this.remoteImgUrl: ", this.blog.remoteImgUrl);
       var desertRef = storageRef.refFromURL(this.blog.remoteImgUrl);
       desertRef.delete().then(() => {
         this.flag = !this.flag;

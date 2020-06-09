@@ -29,9 +29,11 @@
     </b-form>
     <div class="my-style" v-if="submitted">
       <h3>Thanks for adding your post {{blog.title}}</h3>
+      <p>Image:</p>
+      <b-img class="myImg" :src="blog.remoteImgUrl" fluid alt="Right image"></b-img>
+      <br />
       <br />
       <p>Blog Content:</p>
-      <br />
       <p>{{blog.content}}</p>
       <br />
       <p>Blog Categories:</p>
@@ -44,6 +46,7 @@
       </ul>
       <br />
       <p>Author: {{blog.author}}</p>
+      <b-link to="/">Blog List</b-link>
     </div>
   </div>
 </template>
@@ -83,7 +86,7 @@ export default {
         null,
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then(url => {
-            this.remoteImgUrl = url;
+            this.blog.remoteImgUrl = url;
           });
         }
       );
@@ -95,7 +98,7 @@ export default {
       this.addBlog({
         title: this.blog.title,
         content: this.blog.content,
-        remoteImgUrl: this.remoteImgUrl,
+        remoteImgUrl: this.blog.remoteImgUrl,
         categories: this.blog.categories,
         author: this.blog.author
       });
@@ -106,10 +109,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-a {
-  color: #e6ebe9;
+a:link {
+  color: #1b0c02;
+  text-decoration: none;
 }
-.mybg {
-  background-color: #17a2b8 !important;
+
+/* visited link */
+a:visited {
+  color: #444036;
+}
+
+/* mouse over link */
+a:hover {
+  color: #444036;
+}
+
+/* selected link */
+a:active {
+  color: #444036;
 }
 </style>

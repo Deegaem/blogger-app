@@ -8,7 +8,7 @@
           <router-link v-bind:to="'/blog/'+ blog.id">
             <h3 class="card-title">{{blog.title}}</h3>
           </router-link>
-          <b-img id="myImg" right :src="blog.remoteImgUrl" fluid alt="Right image"></b-img>
+          <b-img class="myImg" right :src="blog.remoteImgUrl" fluid alt="Right image"></b-img>
           <b-card-text>{{blog.content|snippet}}</b-card-text>
         </b-card>
       </b-list-group-item>
@@ -60,9 +60,5 @@ a:link {
 }
 .my-border {
   border: 1px solid #e6faf4;
-}
-#myImg{
-max-width: 160px;
-max-height: 62px;
 }
 </style>
