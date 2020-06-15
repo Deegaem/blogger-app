@@ -25,7 +25,8 @@
         </b-form-checkbox-group>
       </b-form-group>
       <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
-      <b-button class="mybtn mt-2" variant="primary" v-on:click.prevent="post">Add Blog</b-button>
+      <b-button class="mybtn mt-2 mr-2" variant="primary" v-on:click="post">Add Blog</b-button>
+      <b-button class="mt-2" variant="primary" v-on:click="cancel">Cancel</b-button>
     </b-form>
     <div class="my-style" v-if="submittedFlag">
       <h3>Thanks for adding your post {{blog.title}}</h3>
@@ -110,6 +111,9 @@ export default {
         author: this.blog.author
       });
       this.submittedFlag = true;
+    },
+    cancel: function() {
+      this.$router.push("/");
     }
   }
 };
@@ -117,22 +121,22 @@ export default {
 
 <style scoped lang="scss">
 a:link {
-  color: #1b0c02;
+  color: yellow;
   text-decoration: none;
 }
 
 /* visited link */
 a:visited {
-  color: #444036;
+  color: cyan;
 }
 
 /* mouse over link */
 a:hover {
-  color: #444036;
+  color: lightgreen;
 }
 
 /* selected link */
 a:active {
-  color: #444036;
+  color: hotpink;
 }
 </style>

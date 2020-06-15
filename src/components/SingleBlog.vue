@@ -33,7 +33,9 @@
         </b-form-checkbox-group>
       </b-form-group>
       <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
-      <b-button variant="primary" v-on:click.prevent="update">Update</b-button>
+      <b-button class="mr-2 mt-2" variant="primary" v-on:click="update">Update</b-button>
+      <b-button class="mr-2 mt-2" variant="primary" v-on:click="removeBlog">Remove</b-button>
+      <b-button class="mt-2" variant="primary" v-on:click="cancel">Cancel</b-button>
     </b-form>
     <div class="my-style" v-if="show">
       <h3 class="mt-3">{{blog.title}}</h3>
@@ -51,8 +53,8 @@
       <br />
       <p>Author: {{blog.author}}</p>
       <br />
-      <button class="btn mybtn btn-primary mx-2 mb-2" v-on:click="toggle">To Update</button>
-      <button class="btn mybtn btn-primary mb-2" v-on:click="removeBlog">Remove</button>
+      <b-button class="mt-2 mr-2" variant="primary" v-on:click="toggle">To Update</b-button>
+      <b-button class="mt-2" variant="primary" v-on:click="cancel">Cancel</b-button>
     </div>
   </div>
 </template>
@@ -112,6 +114,10 @@ export default {
       this.$router.push("/");
     },
     removeBlog: function() {
+      if (this.blog.remoteImgUrl === "") {
+        this.deleteBlog(this.id);
+        this.$router.push("/");
+      }
       this.deleteBlog(this.id);
       this.removeImage();
       this.$router.push("/");
@@ -122,9 +128,11 @@ export default {
         this.flag = !this.flag;
       });
     },
-
     toggle: function() {
       this.show = !this.show;
+    },
+    cancel: function() {
+      this.$router.push("/");
     }
   }
 };
