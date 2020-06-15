@@ -22,4 +22,7 @@ new Vue({
   router,
   store,
   render: (h) => h(App),
+  // mounted: function() {
+  //   console.log("main js this", this);
+  // }
 }).$mount("#app");

@@ -8,7 +8,7 @@
           <router-link v-bind:to="'/blog/'+ blog.id">
             <h3 class="card-title">{{blog.title}}</h3>
           </router-link>
-          <b-img class="myImg" right :src="blog.remoteImgUrl" fluid alt="Right image"></b-img>
+          <b-img class="myImg" right :src="blog.remoteImgUrl" fluid alt="Right image" v-if="blog.imageFlag"></b-img>
           <b-card-text>{{blog.content|snippet}}</b-card-text>
         </b-card>
       </b-list-group-item>
@@ -26,12 +26,8 @@
   </div>
 </template>
 <script>
-// import BlogsFilter from "./BlogsFilter.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  // components: {
-  //   BlogsFilter
-  // },
   name: "ShowBlogs",
   data: () => {
     return {
@@ -41,7 +37,7 @@ export default {
     };
   },
   computed: mapGetters({ blogs: "getAllBlog" }),
-  created: function() {
+  mounted: function() {
     this.getBlogs();
   },
   methods: {

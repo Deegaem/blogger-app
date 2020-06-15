@@ -7,22 +7,29 @@
       <b-form-group label="Blog Content:" label-for="input-2">
         <b-form-textarea id="input-2" v-model="blog.content" size="sm" placeholder="Add content"></b-form-textarea>
       </b-form-group>
-      <b-form-file
-        v-model="file"
-        ref="pickImage"
-        class="mt-3 mb-3"
-        accept="image/*"
-        plain
-        placeholder="select add Image"
-        v-if="!flag"
-      ></b-form-file>
-      <b-progress class="mb-2" variant="primary" :value="value" :max="max" v-if="!flag"></b-progress>
-      <b-button class="mb-2" variant="primary" v-on:click="removeImage" v-if="flag">Remove old image</b-button>
+      <template v-if="blog.imageFlag">
+        <b-form-file
+          v-model="file"
+          ref="pickImage"
+          class="mt-3 mb-3"
+          accept="image/*"
+          plain
+          placeholder="select add Image"
+          v-if="!flag"
+        ></b-form-file>
+        <b-progress class="mb-2" variant="primary" :value="value" :max="max" v-if="!flag"></b-progress>
+        <b-button
+          class="mb-2"
+          variant="primary"
+          v-on:click="removeImage"
+          v-if="flag"
+        >Remove old image</b-button>
+      </template>
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="blog.categories" id="checkboxes-4">
           <b-form-checkbox value="sport">sport</b-form-checkbox>
-          <b-form-checkbox value="hike">Hike</b-form-checkbox>
-          <b-form-checkbox value="travel">Travel</b-form-checkbox>
+          <b-form-checkbox value="hiking">Hiking</b-form-checkbox>
+          <b-form-checkbox value="traveling">Traveling</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
       <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
@@ -31,7 +38,13 @@
     <div class="my-style" v-if="show">
       <h3 class="mt-3">{{blog.title}}</h3>
       <div>
-        <b-img id="myImg" :src="blog.remoteImgUrl" fluid alt="Responsive image"></b-img>
+        <b-img
+          id="myImg"
+          :src="blog.remoteImgUrl"
+          fluid
+          alt="Responsive image"
+          v-if="blog.imageFlag"
+        ></b-img>
       </div>
       <br />
       <p>{{blog.content}}</p>
