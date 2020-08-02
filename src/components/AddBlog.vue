@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-form class="my-style" v-if="!submittedFlag">
+    <b-form class="my-style" v-if="!submittedFlag" @submit="post">
       <h3 v-if="!submittedFlag">Add a New Blog Post</h3>
       <b-form-group id="input-group-1" label="Blog Title:" label-for="input-1">
         <b-form-input id="input-1" v-model="blog.title" type="text" placeholder="Blog Title"></b-form-input>
@@ -25,14 +25,20 @@
         </b-form-checkbox-group>
       </b-form-group>
       <b-form-select class="mb-2" v-model="blog.author" :options="authors"></b-form-select>
-      <b-button class="mybtn mt-2 mr-2" variant="primary" v-on:click="post">Add Blog</b-button>
+      <b-button type="submit" class="mybtn mt-2 mr-2" variant="primary">Submit</b-button>
       <b-button class="mt-2" variant="primary" v-on:click="cancel">Cancel</b-button>
     </b-form>
     <div class="my-style" v-if="submittedFlag">
       <h3>Thanks for adding your post {{blog.title}}</h3>
       <template v-if="blog.imageFlag">
         <p>Image:</p>
-        <b-img class="myImg" :src="blog.remoteImgUrl" fluid alt="Right image"></b-img>
+        <b-img
+          thumbnail
+          width="125"
+          height="125"
+          :src="blog.remoteImgUrl"
+          alt="Right image"
+        ></b-img>
       </template>
       <br />
       <br />
@@ -67,13 +73,13 @@ export default {
         remoteImgUrl: "",
         imageFlag: true,
         categories: [],
-        author: ""
+        author: "",
       },
       authors: ["Adele Vance", "Alex Wiber", "Debra Berger"],
       submittedFlag: false,
       file: null,
       value: 0,
-      max: 100
+      max: 100,
     };
   },
   watch: {
@@ -83,22 +89,23 @@ export default {
       var uploadTask = sr.put(this.file);
       uploadTask.on(
         "state_changed",
-        snapshot => {
+        (snapshot) => {
           this.value =
             (snapshot.bytesTransferred / snapshot.totalBytes) * this.max;
         },
         null,
         () => {
-          uploadTask.snapshot.ref.getDownloadURL().then(url => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
             this.blog.remoteImgUrl = url;
           });
         }
       );
-    }
+    },
   },
   methods: {
     ...mapActions(["addBlog"]),
-    post: function() {
+    post: function (e) {
+      e.preventDefault();
       if (this.blog.remoteImgUrl === "") {
         this.blog.imageFlag = false;
       }
@@ -108,14 +115,14 @@ export default {
         remoteImgUrl: this.blog.remoteImgUrl,
         imageFlag: this.blog.imageFlag,
         categories: this.blog.categories,
-        author: this.blog.author
+        author: this.blog.author,
       });
       this.submittedFlag = true;
     },
-    cancel: function() {
+    cancel: function () {
       this.$router.push("/");
-    }
-  }
+    },
+  },
 };
 </script>
 

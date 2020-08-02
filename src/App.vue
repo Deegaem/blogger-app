@@ -68,8 +68,4 @@ h3 {
 .mybtn:active {
   background-color: #0d3446 !important;
 }
-.myImg{
-max-width: 160px;
-max-height: 62px;
-}
 </style>

@@ -9,10 +9,11 @@
             <h3 class="card-title">{{blog.title}}</h3>
           </router-link>
           <b-img
-            class="myImg"
+            thumbnail 
             right
+            width="125"
+            height="125"
             :src="blog.remoteImgUrl"
-            fluid
             alt="Right image"
             v-if="blog.imageFlag"
           ></b-img>
@@ -63,5 +64,9 @@ a:link {
 }
 .my-border {
   border: 1px solid #e6faf4;
+}
+#my-div{
+max-width: 160px;
+max-height: 62px;
 }
 </style>

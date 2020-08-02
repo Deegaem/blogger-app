@@ -41,9 +41,9 @@
       <h3 class="mt-3">{{blog.title}}</h3>
       <div>
         <b-img
-          id="myImg"
           :src="blog.remoteImgUrl"
-          fluid
+          thumbnail
+          fluid-grow
           alt="Responsive image"
           v-if="blog.imageFlag"
         ></b-img>
@@ -141,9 +141,5 @@ export default {
 <style scoped lang="scss">
 .my-mb {
   margin-bottom: 15px;
-}
-#myImg {
-  max-width: 780px;
-  max-height: 312px;
 }
 </style>
