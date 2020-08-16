@@ -1,13 +1,11 @@
 <template>
   <div id="app">
     <BlogHeader></BlogHeader>
-    <div id="my-wrapper">
-      <b-container>
-        <b-row align-v="center">
-          <router-view />
-        </b-row>
-      </b-container>
-    </div>
+    <b-container>
+      <b-row align-v="center">
+        <router-view />
+      </b-row>
+    </b-container>
     <BlogFooter></BlogFooter>
   </div>
 </template>
@@ -19,8 +17,8 @@ import BlogFooter from "./components/BlogFooter.vue";
 export default {
   components: {
     BlogHeader,
-    BlogFooter
-  }
+    BlogFooter,
+  },
 };
 </script>
 
@@ -32,7 +30,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-color: #686354}
+  background-color: #686354;
+}
 h2,
 h3 {
   color: #444036;
@@ -47,17 +46,6 @@ h3 {
 }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #444036;
-}
-
-#my-wrapper {
-  margin: auto;
-  width: 70%;
-  background-color: #fff;
-  border: 3px solid #e6faf4;
-  padding: 20px;
-}
-.list-group-item {
-  border: 1px solid width;
 }
 .my-style {
   padding: 1.25rem;

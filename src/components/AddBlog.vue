@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <b-container>
     <b-form class="my-style" v-if="!submittedFlag" @submit="post">
       <h3 v-if="!submittedFlag">Add a New Blog Post</h3>
       <b-form-group id="input-group-1" label="Blog Title:" label-for="input-1">
@@ -55,9 +55,9 @@
       </ul>
       <br />
       <p>Author: {{blog.author}}</p>
-      <b-link to="/">Blog List</b-link>
+      <b-link to="/">Carousel</b-link>
     </div>
-  </div>
+</b-container>
 </template>
 
 <script>
