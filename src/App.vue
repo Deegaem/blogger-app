@@ -2,8 +2,11 @@
   <div id="app">
     <BlogHeader></BlogHeader>
     <b-container>
-      <b-row align-v="center">
-        <router-view />
+      <b-row>
+        <b-col class="mybcols" cols="12" col lg="2"></b-col>
+        <b-col col lg="8">
+          <router-view />
+        </b-col>
       </b-row>
     </b-container>
     <BlogFooter></BlogFooter>
@@ -55,5 +58,14 @@ h3 {
 }
 .mybtn:active {
   background-color: #0d3446 !important;
+}
+.mybcols {
+  height: 85vh;
+  background-color: #6d685a;
+}
+@media (max-width: 992px) {
+  .mybcols {
+    display: none;
+  }
 }
 </style>

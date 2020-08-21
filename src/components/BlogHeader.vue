@@ -1,6 +1,6 @@
 <template>
   <b-navbar class="mb-2 my-bg" toggleable="lg" type="dark">
-    <b-container>
+    <b-container class="pl-0">
       <b-navbar-brand href="#">Blogger-app</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
